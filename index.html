@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>NVFlare Training Helper</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #F5F5F5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      text-align: center;
+      width: 400px;
+    }
+    .container img {
+      width: 50px;
+      margin-bottom: 20px;
+    }
+    .container h1 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+    .container p {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 20px;
+    }
+    button {
+      width: 100%;
+      font-size: 16px;
+      padding: 10px 0;
+      margin: 10px 0;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .run-script-button {
+      background-color: #6C63FF;
+      color: white;
+    }
+    .run-script-button:hover {
+      background-color: #5752d1;
+    }
+    .select-dataset-button {
+      background-color: #f5f5f5;
+      color: #666;
+    }
+    .select-dataset-button:hover {
+      background-color: #e0e0e0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="assets/logoempower.png" alt="Logo">
+    <h1>NVFlare Training Helper</h1>
+    <p>Please ensure you have the starter kit and the dataset in the same folder in your system</p>
+    <button id="run-script" class="run-script-button">Run 'start.sh' Script</button>
+    <button id="select-dataset" class="select-dataset-button">Select Dataset Directory</button>
+    <div id="message"></div>
+  </div>
+  <script>
+    const { ipcRenderer } = require('electron')
+
+    document.getElementById('run-script').addEventListener('click', () => {
+      ipcRenderer.send('run-start-script')
+    })
+
+    document.getElementById('select-dataset').addEventListener('click', () => {
+      ipcRenderer.send('select-dataset')
+    })
+
+    ipcRenderer.on('script-result', (event, message) => {
+      document.getElementById('message').innerText = message
+    })
+
+    ipcRenderer.on('dataset-selected', (event, message) => {
+      document.getElementById('message').innerText = message
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{
+  "name": "empower-logo-id-app",
+  "version": "1.0.0",
+  "description": "Logo-ID",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^30.0.8"
+  }
+}
